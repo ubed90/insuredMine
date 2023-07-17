@@ -5,6 +5,7 @@
 
   <textarea
     appTextarea
+    (suggestionListEvent)="handleSuggestionBox($event, suggestionList)"
     placeholder="Use @ for search"
     #textarea
     class="textarea-highlight_textarea"
@@ -14,9 +15,9 @@
     id="highligh-textarea"
   ></textarea>
 
-  <div [style.top]="'min('+(highlight.clientHeight+ 19) +'px'+', 300px)'" [style.left.px]="19" #suggestionList class="textarea-highlight_list">
-    <ng-container *ngFor="let user of users">
-      <button [tabindex]="0" class="textarea-highlight_button">{{ user.username }}</button>
+  <div [class.active]="isListActive" (keydown)="navigateList($event, suggestionList)" [style.top]="'min('+(highlight.clientHeight+ 19) +'px'+', 300px)'" #suggestionList class="textarea-highlight_list">
+    <ng-container *ngFor="let user of users; let i=index">
+      <button [id]="'suggestion-item-'+i" [tabindex]="0" (click)="addToTextArea(user.username)" class="textarea-highlight_button">{{ user.username }}</button>
     </ng-container>
   </div>
 </section>

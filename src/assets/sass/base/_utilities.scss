@@ -92,21 +92,22 @@
 
 // Highlight
 .highlight {
+  display: inline-block;
   position: relative;
-  font-weight: 600;
-  background-color: rgb(244, 202, 73);
+  // font-weight: 600;
+  // background-color: rgb(244, 202, 73);
   // padding: 0.2rem 0.2rem;
   // color: #000;
 
 
-  // &::after {
-  //   content: '';
-  //   position: absolute;
-  //   border-radius: 0.5rem;
-  //   top: -10%;
-  //   left: -10%;
-  //   width: 120%;
-  //   height: 110%;
-  //   background-color: rgb(244, 202, 73);
-  // }
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 0.5rem;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 110%;
+    background-color: rgb(244, 202, 73);
+  }
 }

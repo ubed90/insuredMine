@@ -22,7 +22,11 @@ export class TextareaHighlightComponent implements OnInit, ControlValueAccessor 
 
   value: string = '';
 
-  firstIteration: boolean = true;
+  isListActive: boolean = false;
+
+  currentActiveItem: number = 0;
+
+  userNamesToHighlight: string[] = [];
 
   private onTouch: Function = () => {};
 
@@ -30,7 +34,7 @@ export class TextareaHighlightComponent implements OnInit, ControlValueAccessor 
 
   @ViewChild("backdrop") $backdrop!: ElementRef<HTMLDivElement>;
   @ViewChild("textarea") $textarea!: ElementRef<HTMLTextAreaElement>;
-  @ViewChild("highlight") $hightlightBox!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild("highlight") $hightlightBox!: ElementRef<HTMLDivElement>;
 
   constructor() { }
 
@@ -57,11 +61,13 @@ export class TextareaHighlightComponent implements OnInit, ControlValueAccessor 
     text = text ? text
       .replace(/\n$/g, "\n\n") : '';
 
-    // text = text ? 
-    //       text.substring(0, this.$textarea.nativeElement.selectionStart) : '';
-    this.users.forEach(user => {
+    // if(this.userNamesToHighlight && text) {
+    //   text = text.replace(new RegExp(this.userNameToHighlight), '<span class="highlight">$&</span>');
+    // }
+
+    this.userNamesToHighlight.forEach(user => {
       text = text
-      .replace(new RegExp(user.username, 'g'), '<span class="highlight">$&</span>');
+      .replace(new RegExp(user, 'g'), '<span class="highlight">$&</span>');
     });
     return text;
     
@@ -75,23 +81,50 @@ export class TextareaHighlightComponent implements OnInit, ControlValueAccessor 
     this.$backdrop.nativeElement.scrollLeft = scrollLeft;
   }
 
-  calculateRowNumber() {
-    const { offsetHeight } = this.$hightlightBox.nativeElement;
-    const { lineHeight } = window.getComputedStyle(this.$hightlightBox.nativeElement);
-    const rowNumber = Math.round(offsetHeight / +lineHeight.replace('px', ''));
-    const charsPerRow = Math.round(this.applyHighlight(this.value).length / rowNumber);
-    const lastRowChars = this.applyHighlight(this.value).substring((charsPerRow - +this.$textarea.nativeElement.style.paddingLeft.replace("px", "") + +this.$textarea.nativeElement.style.paddingRight.replace("px", ""))*(rowNumber-1))
-    console.log(lastRowChars);
-
-    // this.$textarea.nativeElement.setSelectionRange(0, this.$textarea.nativeElement.value.length, "forward");
+  handleSuggestionBox(isActive: boolean, suggestionList: HTMLDivElement) {
+    this.isListActive = isActive;
+    this.focusListItem(suggestionList);
   }
 
-  handleSuggestionBox(isActive: boolean, suggestionList: HTMLDivElement) {
-    if(isActive) {
-      // (suggestionList.firstElementChild as HTMLButtonElement).focus();
-      // this.calculateRowNumber();
+  navigateList(event: KeyboardEvent, suggestionList: HTMLDivElement) {
+    switch(event.keyCode) {
+      case 38:
+        if(this.currentActiveItem !== 0) {
+          this.currentActiveItem--;
+          this.focusListItem(suggestionList, this.currentActiveItem);
+        }
+        return;
+
+      case 40:
+        if(this.currentActiveItem < this.users.length) {
+          this.currentActiveItem++;
+          this.focusListItem(suggestionList, this.currentActiveItem)
+        }
+        return;
+
+      default:
+        return;
     }
-    // console.log(this.$hightlightBox.nativeElement.clientHeight, this.$hightlightBox.nativeElement.offsetHeight);
+  }
+
+  focusListItem(suggestionList: HTMLDivElement, index: number = 0) {
+    setTimeout(() => {
+      if(this.isListActive) {
+        const firstButton = suggestionList.querySelector(`#suggestion-item-${index}`);
+        if (firstButton) {
+          (firstButton as HTMLButtonElement).focus();
+        }
+      }
+    }, 100);
+  }
+
+  addToTextArea(username: string) {
+    this.value = this.value.substring(0, this.$textarea.nativeElement.selectionStart - 1) + username + "  ";
+    if(!this.userNamesToHighlight.includes(username)) {
+      this.userNamesToHighlight.push(username);
+    }
+    this.isListActive = false;
+    this.$textarea.nativeElement.focus();
   }
 
 }

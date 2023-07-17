@@ -1,0 +1,27 @@
+<section class="home grid">
+    <h2 class="home_heading">Mention Users</h2>
+    
+    <ng-container *ngIf="users$ | async as users; else loading" >
+        <div *ngIf="users.length !== 0; else noUsers" class="home_container">
+            <app-textarea-highlight
+                [users]="users"
+                [(ngModel)]="textAreaValue"
+            >
+            </app-textarea-highlight>
+        </div>
+
+
+        <ng-template #noUsers>
+            <h5 class="home_noUsers">No Users available</h5>
+        </ng-template>
+    </ng-container>
+
+
+    <ng-template #loading>
+        <app-loading>
+            <span>
+                Fetching Users...
+            </span>
+        </app-loading>
+    </ng-template>
+</section>

@@ -1,0 +1,36 @@
+<div class="auth-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ng-content select="h1"></ng-content>
+
+    <label for="userId">
+      <span>User ID</span>
+      <input type="text" id="userId" placeholder="Ex. johndoe123" formControlName="userId" />
+    </label>
+    <div class="error" *ngIf="userIdRequired">*User Id is required</div>
+    <label for="username" *ngIf="register">
+      <span>Username</span>
+      <input type="text" placeholder="Ex. John Doe" id="username" formControlName="username" />
+    </label>
+    <div class="error" *ngIf="userNameRequired">*Username is required</div>
+    <label for="password">
+      <span>Password</span>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        formControlName="password"
+      />
+    </label>
+    <div class="error" id="password" *ngIf="passwordInvalid">*Password is required</div>
+
+
+    <ng-content select=".error"></ng-content>
+
+    <div class="auth-form__action">
+      <ng-content select="button"></ng-content>
+    </div>
+
+    <div class="auth-form__toggle">
+      <ng-content select="a"></ng-content>
+    </div>
+  </form>
+</div>

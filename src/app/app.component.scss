@@ -1,0 +1,22 @@
+:host {
+    display: contents;
+}
+
+
+.container {
+    width: 100%;
+    height: 100%;
+
+    app-header {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    &-center {
+        grid-column: center-start / center-end;
+    }
+
+    app-footer {
+        grid-column: 1 / -1;
+    }
+}

@@ -1,0 +1,20 @@
+<header class="header container">
+  <nav class="header_nav flex justify-between">
+    <a [routerLink]="['/']">
+      <h1 class="header_logo">InsuredMine</h1>
+    </a>
+
+    <div class="header_links flex align-center">
+        <a *ngIf="user && user.isPrivate" [routerLink]="['./', 'gallery']" class="header_link">Gallery</a>
+        <a [routerLink]="['./', 'about']" class="header_link">About</a>
+
+      <a *ngIf="user" (click)="$event.preventDefault()" class="header_link btn btn-primary"
+        ><span class="material-symbols-outlined"> account_circle </span
+        >{{ user.username }}</a
+      >
+      <a *ngIf="user" (click)="logout()" class="header_link btn btn-primary outlined"
+        ><span class="material-symbols-outlined"> logout </span>Logout</a
+      >
+    </div>
+  </nav>
+</header>

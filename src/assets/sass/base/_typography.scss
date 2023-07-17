@@ -1,0 +1,17 @@
+@use "../abstracts/" as abstracts;
+
+html {
+  font-size: 50%;
+
+  @include abstracts.respond(tab-port) {
+    font-size: 56.25%;
+  }
+
+  @include abstracts.respond(tab-land) {
+    font-size: 62.5%;
+  }
+
+  @include abstracts.respond(big-desktop) {
+    font-size: 75%; //1rem = 12, 12/16
+  }
+}

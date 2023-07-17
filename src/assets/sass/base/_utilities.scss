@@ -1,0 +1,112 @@
+@use "../abstracts/" as abstracts;
+
+.desktop-none {
+  @include abstracts.respond(tab-port) {
+    display: none !important;
+  }
+}
+
+.mobile-none {
+  display: none;
+
+  @include abstracts.respond(lg-phone) {
+    display: initial;
+  }
+}
+
+// Color Utility
+
+.color-primary {
+  color: abstracts.$color-primary !important;
+}
+
+.red {
+  color: red !important;
+}
+
+// Flex Utility Classes
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+// Margins
+.margin-bottom-small {
+  margin-bottom: 2rem;
+
+  @include abstracts.respond(sm-phone) {
+    margin-bottom: 3rem;
+  }
+}
+
+.margin-bottom-medium {
+  margin-bottom: 4rem !important;
+
+  @include abstracts.respond(lg-phone) {
+    margin-bottom: 7rem !important;
+  }
+}
+
+.margin-bottom-big {
+  margin-bottom: 7rem !important;
+
+  @include abstracts.respond(tab-port) {
+    margin-bottom: 8rem !important;
+  }
+}
+
+.margin-top-big {
+  margin-top: 8rem !important;
+}
+.margin-top-huge {
+  margin-top: 10rem !important;
+}
+
+// grid
+.grid {
+  display: grid;
+}
+
+// Center
+
+.u-center-text {
+  text-align: center;
+}
+
+.text-danger {
+  color: hsl(354, 70%, 54%);
+}
+
+
+// Highlight
+.highlight {
+  position: relative;
+  font-weight: 600;
+  background-color: rgb(244, 202, 73);
+  // padding: 0.2rem 0.2rem;
+  // color: #000;
+
+
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   border-radius: 0.5rem;
+  //   top: -10%;
+  //   left: -10%;
+  //   width: 120%;
+  //   height: 110%;
+  //   background-color: rgb(244, 202, 73);
+  // }
+}

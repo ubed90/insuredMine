@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userId": "test@test.com",
+      "password": "test123",
+      "username": "Test User",
+      "isPrivate": true
+    },
+    {
+      "id": 2,
+      "userId": "abc@media.com",
+      "password": "abc123",
+      "username": "Tom",
+      "isPrivate": false
+    },
+    {
+      "id": 3,
+      "userId": "def@media.com",
+      "password": "def123",
+      "username": "Dummy",
+      "isPrivate": false
+    },
+    {
+      "userId": "roshani123",
+      "username": "Roshani",
+      "password": "roshani123",
+      "isPrivate": false,
+      "id": 4
+    }
+  ]
+}

@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@use "assets/sass/base/" as base;
+@use "assets/sass/abstracts/" as abstracts;
+@use "assets/sass/layout/" as layout;
+@use "assets/sass/components/" as components;
+
+// Global Tags

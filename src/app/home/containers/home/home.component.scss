@@ -1,0 +1,15 @@
+@import 'variables';
+
+.home {
+    padding-block: 1rem;
+    font-size: 1.6rem;
+
+    gap: 2.6rem;
+
+    &_heading {
+        color: $color-primary;
+        text-align: center;
+        text-decoration: underline;
+        text-underline-offset: 0.3rem;
+    }
+}

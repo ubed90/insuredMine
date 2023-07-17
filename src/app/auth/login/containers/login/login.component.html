@@ -1,0 +1,12 @@
+<section>
+    <app-auth-form (submitted)="loginUser($event)" >
+        <h1>Login</h1>
+        <a routerLink="/auth/register">Not Registered?</a>
+        <button class="btn btn-solid" type="submit">
+            Login
+        </button>
+        <div class="error" *ngIf="error !== ''">
+            {{ error }}
+        </div>
+    </app-auth-form>
+</section>

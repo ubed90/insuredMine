@@ -1,0 +1,47 @@
+@use '../abstracts/' as abstracts;
+
+.btn {
+    &,
+    &:link,
+    &:visited {
+        text-decoration: none;
+        padding: 0.3rem 0.7rem;
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+    }
+
+    &-primary {
+        background-color: abstracts.$color-white;
+        color: abstracts.$color-primary;
+        border-radius: 0.5rem;
+
+
+        &.outlined {
+            color: abstracts.$color-white;
+            background-color: initial;
+            border: 0.1rem solid abstracts.$color-white;
+        }
+    }
+
+    &-solid {
+        cursor: pointer;
+        outline: 0;
+        width: 100%;
+        border-radius: 0.2rem;
+        border: 0.1rem solid abstracts.$color-primary-light;
+        background: abstracts.$color-primary;
+        color: #fff;
+        justify-content: center;
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background: darken(abstracts.$color-primary, 5%);
+            border-color: darken(abstracts.$color-primary-light, 5%);
+        }
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+}

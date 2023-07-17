@@ -1,0 +1,22 @@
+<section class="textarea-highlight">
+  <div #backdrop class="textarea-highlight_backdrop">
+    <div #highlight [innerHTML]="highlightedUsernames" class="textarea-highlight_highlights"></div>
+  </div>
+
+  <textarea
+    appTextarea
+    placeholder="Use @ for search"
+    #textarea
+    class="textarea-highlight_textarea"
+    [(ngModel)]="value"
+    (scroll)="handleScroll()"
+    name="highlights"
+    id="highligh-textarea"
+  ></textarea>
+
+  <div [style.top]="'min('+(highlight.clientHeight+ 19) +'px'+', 300px)'" [style.left.px]="19" #suggestionList class="textarea-highlight_list">
+    <ng-container *ngFor="let user of users">
+      <button [tabindex]="0" class="textarea-highlight_button">{{ user.username }}</button>
+    </ng-container>
+  </div>
+</section>
